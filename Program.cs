@@ -32,11 +32,12 @@ namespace EmployeeWageComputation
                 Console.WriteLine("Please enter no. of working hours for month");
                 int monthlyWorkingHours = Convert.ToInt32(Console.ReadLine());
                 
-                computeEmployeeWage.CalculateMonthlyWage(nameOfCompany, wagePerHour, noOfWorkingDays, monthlyWorkingHours);
+                computeEmployeeWage.AddContactDetails(nameOfCompany, wagePerHour, noOfWorkingDays, monthlyWorkingHours);
                 Console.WriteLine("Do you want to compute for another company, press y to compute.");
                 checkForInput = Console.ReadLine();
 
             }
+            computeEmployeeWage.CalculateMonthlyWage();
             computeEmployeeWage.toString();
 
         }
