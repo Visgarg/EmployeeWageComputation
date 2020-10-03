@@ -65,10 +65,11 @@ namespace EmployeeWageComputation
        /// <returns></returns>
         internal  int CalculateMonthlyWage(EmployeeDetails employeeDetail)
         { 
-            int fullDayHour;
+            //Array for daily working hours and daily wages of workers
+            int[] fullDayHour= new int[employeeDetail.noOfWorkingDays];
             int workDayCount = 0;
             int totalWorkingHours = 0;
-            int totalDailyWage;
+            int[] totalDailyWage= new int[employeeDetail.noOfWorkingDays];
             int monthlyWage;
             Console.WriteLine($"Employee wages for {employeeDetail.companyName}");
             //calculating total monthly wage by applying while loop on working days
@@ -79,13 +80,13 @@ namespace EmployeeWageComputation
                 int checkIfPresent = random.Next(0, 3);
                 // instatiating compute employee wage class and calling WorkHours method which returns no of hours according to employee's presence.
                 ComputeEmployeeWage computeEmployeeWage = new ComputeEmployeeWage();
-                fullDayHour = computeEmployeeWage.WorkHours(checkIfPresent, workDayCount);
-                if (totalWorkingHours + fullDayHour > employeeDetail.hoursPerMonth)
+                fullDayHour[workDayCount] = computeEmployeeWage.WorkHours(checkIfPresent, workDayCount);
+                if (totalWorkingHours + fullDayHour[workDayCount] > employeeDetail.hoursPerMonth)
                 {
-                    fullDayHour = 0;
+                    fullDayHour[workDayCount] = 0;
                 }
-                totalWorkingHours += fullDayHour;
-                totalDailyWage = fullDayHour * employeeDetail.wagePerHour;
+                totalWorkingHours += fullDayHour[workDayCount];
+                totalDailyWage[workDayCount] = fullDayHour[workDayCount] * employeeDetail.wagePerHour;
                 Console.WriteLine($"Total daily wage is for {workDayCount + 1} is {totalDailyWage}");
                 workDayCount++;
                 //.LogDebug("Successfully Calculated daily employee wage : Main()");
