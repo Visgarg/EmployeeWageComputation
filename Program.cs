@@ -20,7 +20,8 @@ namespace EmployeeWageComputation
             nLog.LogInfo("Welcome message displayed : Main()");
             //instatiating computeEmployeewage class class for calling calculatemonthlywage method to calculate monthlywage.
             ComputeEmployeeWage computeEmployeeWage = new ComputeEmployeeWage();
-            computeEmployeeWage.CalculateMonthlyWage();
+            computeEmployeeWage.CalculateMonthlyWage("Reliance",20,20,100);
+            computeEmployeeWage.CalculateMonthlyWage("Dmart", 15, 24, 120);
 
         }
         
