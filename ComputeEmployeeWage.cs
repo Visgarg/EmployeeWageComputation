@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using NLog;
@@ -9,13 +10,26 @@ namespace EmployeeWageComputation
     {
         const int IS_PRESENT = 1;
         const int IS_PART_TIME = 2;
+        //string companyName;
+        //int wagePerHour;
+        //int noOfWorkingDays;
+        //int hoursPerMonth;
         NLog nLog = new NLog();
+        public Dictionary<string, int> CompanyWageInDictionary;
+        public ComputeEmployeeWage()
+            {
+            CompanyWageInDictionary = new Dictionary<string, int>();
+            }
+        
         /// <summary>
-        /// calculating monthly wages of employee
+        /// 
         /// </summary>
-        public void CalculateMonthlyWage(string companyName, int wagePerHour, int noOfWorkingDays, int hoursPerMonth = 100)
-        {
-            
+        /// <param name="companyName"></param>
+        /// <param name="wagePerHour"></param>
+        /// <param name="noOfWorkingDays"></param>
+        /// <param name="hoursPerMonth"></param>
+        public  void CalculateMonthlyWage(string companyName, int wagePerHour, int noOfWorkingDays, int hoursPerMonth)
+        { 
             int fullDayHour;
             int workDayCount = 0;
             int totalWorkingHours = 0;
@@ -45,13 +59,14 @@ namespace EmployeeWageComputation
             nLog.LogDebug("Successfully calculated monthly employee wage: calculateMonthlyWage()");
             Console.WriteLine("********************************************************************");
             Console.WriteLine($"The monthly wage for employee of {companyName} is {monthlyWage}");
+            CompanyWageInDictionary[companyName] = monthlyWage;
         }
         /// <summary>
         /// Calculating Work hours after checking presence of employee.
         /// </summary>
         /// <param name="checkIfPresent"></param>
         /// <returns>int emphours</returns>
-        public int WorkHours(int checkIfPresent, int workDayCount)
+        public   int WorkHours(int checkIfPresent, int workDayCount)
         {
             switch (checkIfPresent)
             {
@@ -69,5 +84,14 @@ namespace EmployeeWageComputation
                     return 0;
             }
         }
+        public void toString()
+        {
+            Console.WriteLine("**********************************************************************");
+            foreach(var companywages in CompanyWageInDictionary)
+            {
+                Console.WriteLine($"The employee wage of {companywages.Key} is {companywages.Value}");
+            }
+        }
     }
 }
+
