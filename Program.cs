@@ -5,6 +5,7 @@ namespace EmployeeWageComputation
     class Program
     {
         const int IS_PRESENT = 1;
+        const int IS_PART_TIME = 2;
         NLog nLog = new NLog();
         /// <summary>
         /// Main method for calling welcome message and checking employee presence.
@@ -22,7 +23,7 @@ namespace EmployeeWageComputation
             nLog.LogInfo("Welcome message displayed : Main()");
             //using Random method to generate random no and compare with constants to check presence.
             Random random = new Random();
-            int checkIfPresent = random.Next(0, 2);
+            int checkIfPresent = random.Next(0, 3);
             // instatiating program class and calling WorkHours method which returns no of hours according to employee's presence.
             Program program = new Program();
             fullDayHour = program.WorkHours(checkIfPresent);
@@ -48,9 +49,16 @@ namespace EmployeeWageComputation
                 nLog.LogDebug("Debug successful, for employee presence: WorkHours()");
                 return 8;
             }
+            else if(checkIfPresent==IS_PART_TIME)
+            {
+                Console.WriteLine("Employee is present for part time");
+                nLog.LogDebug("Debug successful, for employee presence: WorkHours()");
+                return 4;
+            }
             else
             {
                 Console.WriteLine("Employee is Absent");
+                nLog.LogDebug("Debug successful, for employee presence: WorkHours()");
                 return  0;
             }
 

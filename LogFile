@@ -1,3 +1,6 @@
 2020-10-03 12:24:34.4990 INFO Welcome message displayed : Main()
 2020-10-03 12:37:12.5665 INFO Welcome message displayed : Main()
 2020-10-03 12:37:12.6468 DEBUG Successfully Calculated daily employee wage : Main()
+2020-10-03 15:22:10.6712 INFO Welcome message displayed : Main()
+2020-10-03 15:22:10.7401 DEBUG Debug successful, for employee presence: WorkHours()
+2020-10-03 15:22:10.7401 DEBUG Successfully Calculated daily employee wage : Main()
