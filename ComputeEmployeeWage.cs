@@ -13,16 +13,15 @@ namespace EmployeeWageComputation
         /// <summary>
         /// calculating monthly wages of employee
         /// </summary>
-        public void CalculateMonthlyWage()
+        public void CalculateMonthlyWage(string companyName, int wagePerHour, int noOfWorkingDays, int hoursPerMonth = 100)
         {
-            int wagePerHour = 20;
+            
             int fullDayHour;
             int workDayCount = 0;
-            int noOfWorkingDays = 20;
-            int hoursPerMonth = 100;
             int totalWorkingHours = 0;
             int totalDailyWage;
             int monthlyWage;
+            Console.WriteLine($"Employee wages for {companyName}");
             //calculating total monthly wage by applying while loop on working days
             while (workDayCount < noOfWorkingDays && totalWorkingHours <= hoursPerMonth)
             {
@@ -45,7 +44,7 @@ namespace EmployeeWageComputation
             monthlyWage = totalWorkingHours * wagePerHour;
             nLog.LogDebug("Successfully calculated monthly employee wage: calculateMonthlyWage()");
             Console.WriteLine("********************************************************************");
-            Console.WriteLine("The monthly wage of an employee is " + monthlyWage);
+            Console.WriteLine($"The monthly wage for employee of {companyName} is {monthlyWage}");
         }
         /// <summary>
         /// Calculating Work hours after checking presence of employee.
