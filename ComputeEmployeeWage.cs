@@ -16,7 +16,8 @@ namespace EmployeeWageComputation
         //int hoursPerMonth;
         NLog nLog = new NLog();
         public Dictionary<string, int> CompanyWageInDictionary;
-        public EmployeeDetails[] companyWageArray;
+        //public EmployeeDetails[] companyWageArray;
+        public List<EmployeeDetails> employeeDetailsList;
         int companyIndex=0;
         /// <summary>
         /// Constructor of compute employee wage which instatiates array and dictionary.
@@ -24,7 +25,8 @@ namespace EmployeeWageComputation
         public ComputeEmployeeWage()
             {
             CompanyWageInDictionary = new Dictionary<string, int>();
-            companyWageArray = new EmployeeDetails[5];
+            //companyWageArray = new EmployeeDetails[5];
+            employeeDetailsList = new List<EmployeeDetails>();
             }
         /// <summary>
         /// adding contact details by taking input from user, adding them to employeedetails object and assigning it to array of employeedetails object.
@@ -36,8 +38,9 @@ namespace EmployeeWageComputation
         public void AddContactDetails(string companyName, int wagePerHour, int noOfWorkingDays, int hoursPerMonth)
         {
             EmployeeDetails employeeDetails = new EmployeeDetails(companyName,wagePerHour,noOfWorkingDays,hoursPerMonth);
-            companyWageArray[companyIndex] = employeeDetails;
-            companyIndex++;
+            //companyWageArray[companyIndex] = employeeDetails;
+            //companyIndex++;
+            employeeDetailsList.Add(employeeDetails);
             
         }
         /// <summary>
@@ -46,11 +49,12 @@ namespace EmployeeWageComputation
         public void CalculateMonthlyWage()
         {
             ComputeEmployeeWage computeEmployeeWage = new ComputeEmployeeWage();
-            for(int a=0;a<companyIndex;a++)
+            //for(int a=0;a<companyIndex;a++)
+            foreach(EmployeeDetails employeeDetails in employeeDetailsList)
             {
-                int monthlyWage=  computeEmployeeWage.CalculateMonthlyWage(companyWageArray[a]);
-                companyWageArray[a].SetTotalWage(monthlyWage) ;
-                CompanyWageInDictionary.Add(companyWageArray[a].companyName, monthlyWage);
+                int monthlyWage=  computeEmployeeWage.CalculateMonthlyWage(employeeDetails);
+                employeeDetails.SetTotalWage(monthlyWage) ;
+                CompanyWageInDictionary.Add(employeeDetails.companyName, monthlyWage);
 
             }
         }
