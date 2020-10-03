@@ -33,11 +33,12 @@ namespace EmployeeWageComputation
             int fullDayHour;
             int workDayCount = 0;
             int noOfWorkingDays = 20;
+            int hoursPerMonth = 100;
             int totalWorkingHours = 0;
             int totalDailyWage;
             int monthlyWage;
             //calculating total monthly wage by applying while loop on working days
-            while(workDayCount<noOfWorkingDays)
+            while(workDayCount<noOfWorkingDays && totalWorkingHours<=hoursPerMonth)
             {
                 //using Random method to generate random no and compare with constants to check presence.
                 Random random = new Random();
@@ -45,9 +46,13 @@ namespace EmployeeWageComputation
                 // instatiating program class and calling WorkHours method which returns no of hours according to employee's presence.
                 Program program = new Program();
                 fullDayHour = program.WorkHours(checkIfPresent,workDayCount);
-                totalDailyWage = fullDayHour * wagePerHour;
-                Console.WriteLine($"Total daily wage is for {workDayCount+1} is {totalDailyWage}");
+                if(totalWorkingHours+fullDayHour>hoursPerMonth)
+                {
+                    fullDayHour = 0;
+                }
                 totalWorkingHours += fullDayHour;
+                totalDailyWage = fullDayHour * wagePerHour;
+                Console.WriteLine($"Total daily wage is for {workDayCount + 1} is {totalDailyWage}");
                 workDayCount++;
                 //.LogDebug("Successfully Calculated daily employee wage : Main()");
             }
