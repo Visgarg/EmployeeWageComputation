@@ -6,7 +6,7 @@ using NLog;
 
 namespace EmployeeWageComputation
 {
-    class ComputeEmployeeWage
+    class ComputeEmployeeWage:IComputeEmployeeWage
     {
         const int IS_PRESENT = 1;
         const int IS_PART_TIME = 2;
@@ -15,7 +15,7 @@ namespace EmployeeWageComputation
         //int noOfWorkingDays;
         //int hoursPerMonth;
         NLog nLog = new NLog();
-        public Dictionary<string, int> CompanyWageInDictionary;
+        public Dictionary<string, EmployeeDetails> CompanyWageInDictionary;
         //public EmployeeDetails[] companyWageArray;
         public List<EmployeeDetails> employeeDetailsList;
         int companyIndex=0;
@@ -24,7 +24,7 @@ namespace EmployeeWageComputation
         /// </summary>
         public ComputeEmployeeWage()
             {
-            CompanyWageInDictionary = new Dictionary<string, int>();
+            CompanyWageInDictionary = new Dictionary<string, EmployeeDetails>();
             //companyWageArray = new EmployeeDetails[5];
             employeeDetailsList = new List<EmployeeDetails>();
             }
@@ -54,7 +54,7 @@ namespace EmployeeWageComputation
             {
                 int monthlyWage=  computeEmployeeWage.CalculateMonthlyWage(employeeDetails);
                 employeeDetails.SetTotalWage(monthlyWage) ;
-                CompanyWageInDictionary.Add(employeeDetails.companyName, monthlyWage);
+                CompanyWageInDictionary.Add(employeeDetails.companyName, employeeDetails);
 
             }
         }
@@ -87,7 +87,7 @@ namespace EmployeeWageComputation
                 }
                 totalWorkingHours += fullDayHour[workDayCount];
                 totalDailyWage[workDayCount] = fullDayHour[workDayCount] * employeeDetail.wagePerHour;
-                Console.WriteLine($"Total daily wage is for {workDayCount + 1} is {totalDailyWage}");
+                Console.WriteLine($"Total daily wage is for {workDayCount + 1} is {totalDailyWage[workDayCount]}");
                 workDayCount++;
                 //.LogDebug("Successfully Calculated daily employee wage : Main()");
             }
@@ -130,7 +130,7 @@ namespace EmployeeWageComputation
             foreach(var companywages in CompanyWageInDictionary)
             {
                 nLog.LogInfo("Successfully printed all the values of companies and their employee wages: toString()");
-                Console.WriteLine($"The employee wage of {companywages.Key} is {companywages.Value}");
+                Console.WriteLine($"The employee wage of {companywages.Key} is {companywages.Value.totalMonthlyWage}");
             }
         }
     }
